@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple pub-sub implementation</title>
+    <style>
+    li i {
+        margin-left: 10px;
+        color: white;
+        padding: 5px;
+        background-color: red;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+    }
+    
+    li {
+        list-style-type: none;
+        display: inline;
+        margin: 5px;
+        padding: 10px;
+        background-color: #aaeeee;
+    }
+    .people-module {
+      padding:10px 5px;
+    }
+    .people-module + .people-module {
+        margin-top: 10px;
+        border-top: 1px dashed black;
+    }
+    </style>
+    <script>
+    var myApp = myApp || {};
+    </script>
+</head>
+
+<body>
+    <div id="statsModule">
+        <h1>People <span id="counter"></span></h1>
+    </div>
+    <div id="peopleModule1" class="people-module">
+        <h2>Module 1</h2>
+        <input type="text" placeholder="add person..">
+        <button>Add
+        </button>
+        <ul></ul>
+    </div>
+    <div id="peopleModule2" class="people-module">
+        <h2>Module 2</h2>
+        <input type="text" placeholder="add person..">
+        <button>Add
+        </button>
+        <ul></ul>
+    </div>
+    <script src="events.js"></script>
+    <script src="statsModule.js"></script>
+    <script src="peopleModule.js"></script>
+    <script>
+      var stats = new myApp.statsModule({
+        el: '#statsModule',
+        events: myApp.events
+      })
+
+      var people1 = new myApp.peopleModule({
+        el: '#peopleModule1',
+        events: myApp.events
+      })
+
+      people1.addPerson('John');
+      people1.addPerson('Mark');
+
+      var people2 = new myApp.peopleModule({
+        el: '#peopleModule2',
+        events: myApp.events
+      })
+
+      people2.addPerson('Ann');
+
+    </script>
+</body>
+
+</html>
